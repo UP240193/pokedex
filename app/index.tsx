@@ -1,8 +1,15 @@
-import { useEffect } from "react";
+
+import { use, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
 
 export default function Index() {
+
+const [results, setResults] = useState<any[]>([]);
+  useEffect(() => {
+    console.log("Entre en pantalla");
+    getPokemons();
+  }, []);
 
   useEffect(() => {
     getPokemons();
@@ -15,7 +22,9 @@ export default function Index() {
       method: "GET",
     });
     if (response.ok) {
-      console.log("Request Ok");
+      console.log(response);
+      const data = await response.json();
+      setResults(data.results);
     } else {
       console.log("Bad Request");
     }
@@ -26,7 +35,9 @@ export default function Index() {
 
   return (
     <View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      {results.map((item) => (
+        <Text key={item.name}>{item.name}</Text>
+      ))}
     </View>
   );
 }
