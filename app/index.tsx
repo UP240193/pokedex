@@ -2,6 +2,7 @@
 import { use, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
+import PokemonCard from "../components/PokemonCard";
 
 export default function Index() {
 
@@ -36,7 +37,10 @@ const [results, setResults] = useState<any[]>([]);
   return (
     <View>
       {results.map((item) => (
-        <Text key={item.name}>{item.name}</Text>
+        <PokemonCard 
+        key={item.name} 
+        name={item.name} 
+        url={item.url}></PokemonCard>
       ))}
     </View>
   );
