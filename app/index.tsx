@@ -1,6 +1,6 @@
 
 import { use, useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text,} from "react-native";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
 import PokemonCard from "../components/PokemonCard";
 
@@ -35,13 +35,13 @@ const [results, setResults] = useState<any[]>([]);
     }
 
   return (
-    <View>
+    <ScrollView>
       {results.map((item) => (
         <PokemonCard 
         key={item.name} 
         name={item.name} 
         url={item.url}></PokemonCard>
       ))}
-    </View>
+    </ScrollView>
   );
 }
