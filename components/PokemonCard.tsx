@@ -15,7 +15,7 @@ export default function PokemonCard(props: PokemonCardProps) {
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
     return (
         <Pressable 
-            onPress={() => router.push('/new-screen')} 
+            onPress={() => router.push(`/pokemon/${props.name}`)} 
             style={({ pressed }) => [
                 styles.pressableStyle,
                 pressed &&
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         margin: 5,
         padding: 5,
-        backgroundColor: "#0c246a",
+        backgroundColor: "#2e92a6",
 
 
     }

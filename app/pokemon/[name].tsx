@@ -1,12 +1,37 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text } from "react-native";
 
-export default function pokemonDetailsScreen() {
-    const params = useLocalSearchParams();
+export default function PokemonDetailsScreen() {
+  const [pokemon, setPokemon] = useState<any>(null);
+  const params = useLocalSearchParams();
+
+  useEffect(() => {
+    console.log("Pasando info");
+    infoditto();
+  }, []);
+
+  const infoditto = async () => {
+    try {
+      const URL = `https://pokeapi.co/api/v2/pokemon/${params.name}`;
+      const response = await fetch(URL);
+      if (response.ok) {
+        const data = await response.json();
+        setPokemon(data);
+      } else {
+        console.log("Bad request");
+      }
+    } catch (error) {
+      console.log("Ocurrio un error");
+    }
+  };
+
+  if (!pokemon) {
+    return <Text>cargando...</Text>;
+  }
   return (
-    <View>
-      <Text> pokemonDetailsScreen</Text>
-    </View>
-  )
+    <ScrollView>
+      <Text>{JSON.stringify(pokemon, null, 2)}</Text>
+    </ScrollView>
+  );
 }

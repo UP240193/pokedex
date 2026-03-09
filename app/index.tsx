@@ -4,9 +4,15 @@ import { ScrollView, Text,} from "react-native";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
 import PokemonCard from "../components/PokemonCard";
 
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
+
 export default function Index() {
 
-const [results, setResults] = useState<any[]>([]);
+const [results, setResults] = useState<Pokemon[]>([]);
   useEffect(() => {
     console.log("Entre en pantalla");
     getPokemons();
